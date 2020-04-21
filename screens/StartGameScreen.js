@@ -1,3 +1,4 @@
+// @refresh reset
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, Button, TouchableWithoutFeedback, Keyboard, Alert } from 'react-native';
 
@@ -6,10 +7,10 @@ import Card from '../components/Card.js';
 import Input from '../components/Input.js';
 import NumberContainer from '../components/NumberContainer.js';
 
-const StartGameScreen = () => {
+const StartGameScreen = (props) => {
     const [ enteredValue, setEnteredValue ] = useState('');
     const [ confirmed, setConfirmed ] = useState(false);
-    const [ gameNumber, setGameNumber ] = useState();
+    const [ userChoice, setUserChoice ] = useState();
 
     const handleChangeNumber = (inputText) => setEnteredValue(inputText.replace(/[^0-9]/g, ''));
 
@@ -31,7 +32,7 @@ const StartGameScreen = () => {
 
         setConfirmed(true);
         setEnteredValue('')
-        setGameNumber(parseInt(enteredValue));
+        setUserChoice(parseInt(enteredValue));
         Keyboard.dismiss();
     };
 
@@ -41,8 +42,8 @@ const StartGameScreen = () => {
         confiremdOutput = (
             <Card style={styles.summaryContainer}>
                 <Text>You selected</Text>
-                <NumberContainer number={gameNumber}/>
-                <Button title="Start game" color={colors.primary}/>
+                <NumberContainer number={userChoice}/>
+                <Button title="START GAME" color={colors.primary} onPress={() => props.handleStartGame(userChoice)}/>
             </Card>
         );
     }
