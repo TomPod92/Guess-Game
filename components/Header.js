@@ -18,12 +18,15 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
       width: '100%',
       height: 70,
-      paddingTop: 0,
+      paddingTop: 20,
       backgroundColor: colors.primary,
   },
   headerTitle: {
-      color: 'black',
+      color: 'white',
       fontSize: 18,
+      textTransform: 'uppercase',
+      letterSpacing: 1,
+      fontFamily: 'open-sans-bold'
   }
 });
  

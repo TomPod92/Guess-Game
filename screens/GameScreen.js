@@ -1,10 +1,10 @@
 // @refresh reset
 import React, { useState, useRef, useEffect } from 'react';
-import { StyleSheet, View, Text, Button, Alert } from 'react-native';
+import { StyleSheet, View, Text, Alert } from 'react-native';
 
 import NumberContainer from '../components/NumberContainer.js';
 import Card from '../components/Card.js';
-import colors from '../constants/colors.js';
+import MyButton from '../components/MainButton.js';
 
 const generateRandomNumber = (min, max, exclude) => {
     min = Math.ceil(min);
@@ -62,13 +62,13 @@ const GameScreen = (props) => {
             <Text>Game guess:</Text>
             <NumberContainer number={currentGuess}/>
             <Text>You number: {props.userChoice}</Text>
+            
             <Card style={styles.buttonContainer}>
-                <Button title="LOWER" color={colors.primary} onPress={() => createNextGuess('lower')}/>
-                <Button title="GREATER" color={colors.accent} onPress={() => createNextGuess('greater')}/>
+                <MyButton primary={true} onPress={() => createNextGuess('lower')}>LOWER</MyButton>
+                <MyButton primary={false} onPress={() => createNextGuess('greater')}>GREATER</MyButton>
             </Card>
-            <View style={styles.newGameButton}>
-                <Button title="New game" onPress={props.handleNewGame}/>
-            </View>
+
+            <MyButton style={styles.newGameButton} primary={true} onPress={props.handleNewGame}>NEW GAME</MyButton>
         </View>
     );
 };
@@ -88,9 +88,6 @@ const styles = StyleSheet.create({
     },
     newGameButton: {
         marginTop: 20,
-        // borderRadius: 10,
-        // borderColor: colors.primary,
-        // borderWidth: 2,
     }
 });
  

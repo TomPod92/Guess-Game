@@ -1,11 +1,14 @@
 // @refresh reset
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, Button, TouchableWithoutFeedback, Keyboard, Alert } from 'react-native';
+import { StyleSheet, Text, View, TouchableWithoutFeedback, Keyboard, Alert } from 'react-native';
 
 import colors from '../constants/colors.js';
 import Card from '../components/Card.js';
 import Input from '../components/Input.js';
 import NumberContainer from '../components/NumberContainer.js';
+import MainButton from '../components/MainButton.js';
+// import BodyText from '../components/BodyText.js'; // Zeby dodac font style do wszystkich <Text> wystarczy zamienic je na ten importowany komponent, opcja 1
+import defaultStyles from '../constants/default-styles.js'; // opcja 2
 
 const StartGameScreen = (props) => {
     const [ enteredValue, setEnteredValue ] = useState('');
@@ -36,14 +39,14 @@ const StartGameScreen = (props) => {
         Keyboard.dismiss();
     };
 
-    let confiremdOutput;
+    let confirmedOutput;
 
     if(confirmed) {
-        confiremdOutput = (
+        confirmedOutput = (
             <Card style={styles.summaryContainer}>
-                <Text>You selected</Text>
+                <Text style={defaultStyles.title}>You selected</Text>
                 <NumberContainer number={userChoice}/>
-                <Button title="START GAME" color={colors.primary} onPress={() => props.handleStartGame(userChoice)}/>
+                <MainButton primary={true} onPress={() => props.handleStartGame(userChoice)}>START GAME</MainButton>
             </Card>
         );
     }
@@ -65,15 +68,11 @@ const StartGameScreen = (props) => {
                 />
 
                 <View style={styles.buttonContainer}>
-                    <View  style={styles.button}>
-                        <Button title="Reset" color={colors.accent} onPress={handleReset}/>    
-                    </View>
-                    <View style={styles.button}>
-                        <Button title="Confirm" color={colors.primary} onPress={handleConfirm}/>
-                    </View>
+                    <MainButton style={styles.button} primary={false} onPress={handleReset}>RESET</MainButton>
+                    <MainButton style={styles.button} primary={true} onPress={handleConfirm}>CONFIRM</MainButton>
                 </View>
             </Card>
-            {confiremdOutput}
+            {confirmedOutput}
         </View>
         </TouchableWithoutFeedback>
     );
@@ -97,7 +96,8 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 20, 
-        marginVertical: 10
+        marginVertical: 10,
+        fontFamily: 'open-sans-bold'
     },
     buttonContainer: {
         width: '100%',
@@ -105,8 +105,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     button: {
+        marginRight: 10,
         width: 100,
-        marginRight: 10
+        alignItems: 'center'
     },
     summaryContainer: {
         alignItems: 'center',
