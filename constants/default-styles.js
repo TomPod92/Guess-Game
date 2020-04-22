@@ -9,3 +9,12 @@ export default StyleSheet.create({
         fontFamily: 'open-sans',
     },
 });
+
+// Teraz w jakims komponencie mozemy to zaiportować
+// -- import defaultStyles from'...'
+// I użyć w stylach jakiegos komponentu
+// -- const styles = StyleSheet.create({
+//       myText: {
+//         fontStyle: defaultStyles.title,
+//       }
+//    });

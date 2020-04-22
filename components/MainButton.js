@@ -16,8 +16,8 @@ const MainButton = (props) => {
 const styles = StyleSheet.create({
     button: {
         paddingVertical: 8,
-        paddingHorizontal: 16,
-        borderRadius: 30
+        paddingHorizontal: 24,
+        borderRadius: 30,
     },
     buttonText: {
         color: 'white',

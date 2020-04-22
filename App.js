@@ -1,6 +1,6 @@
 // @refresh reset
 import React, { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
 import * as font from 'expo-font';
 import { AppLoading } from 'expo';
 
@@ -21,6 +21,7 @@ const App = () => {
   const [ rounds, setRounds ] = useState(0);
   const [ dataLoaded, setDataLoaded ] = useState(false);
 
+  // Ten komponent wydłuża ładowanie apki na tyle aby zdązyły załadowac sie pliki z font'ami
   if(!dataLoaded) {
     return <AppLoading startAsync={fetchFonts} onFinish={() => setDataLoaded(true)} onError={(error) => console.log(error)}/>
   }
@@ -47,10 +48,13 @@ const App = () => {
   }
 
   return (
-    <View style={styles.screen}>
+    // Czasami warto zmienic okalający cała apkę <View/> na <SafeAreaView/>. Wtedy elementy nie będą zasłaniane przez jakieś "wystające elementy obudowy"
+    <SafeAreaView style={styles.screen}> 
+    {/* <View style={styles.screen}> */}
       <Header title="Guess a number"/>
       { content }
-    </View>
+    {/* </View> */}
+    </SafeAreaView>
   );
 }
 

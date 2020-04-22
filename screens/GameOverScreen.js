@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, Image } from 'react-native';
+import { StyleSheet, View, Text, Image, ScrollView, Dimensions } from 'react-native';
 
 import TitleText from '../components/TitleText.js';
 import BodyText from '../components/BodyText.js';
@@ -8,21 +8,23 @@ import colors from '../constants/colors.js';
 
 const GameOverScreen = (props) => {
     return (
-        <View style={styles.screen}>
-            <TitleText>Game Over</TitleText>
-            <View style={styles.resultContainer}>
-                <BodyText style={styles.resultText}>Your phone needed <Text style={styles.highlight}>{props.rounds}</Text> round to guess the number <Text style={styles.highlight}>{props.userChoice}</Text></BodyText>
+        <ScrollView>
+            <View style={styles.screen}>
+                <TitleText>Game Over</TitleText>
+                <View style={styles.resultContainer}>
+                    <BodyText style={styles.resultText}>Your phone needed <Text style={styles.highlight}>{props.rounds}</Text> round to guess the number <Text style={styles.highlight}>{props.userChoice}</Text></BodyText>
+                </View>
+                
+                <Image 
+                    style={styles.image} 
+                    source={require('../assets/original.png')} // dla lokalnych obrazkow 
+                    // source={{ uri: 'https://www.yourdictionary.com/images/definitions/lg/12337.summit.jpg' }} // dla obrazkow z sieci (zawsze trzeba im podac "width" i "height")
+                    resizeMode="cover"
+                    fadeDuration={1000}
+                />
+                <MyButton style={styles.newGameButton} primary={false} onPress={props.handleNewGame}>NEW GAME</MyButton>
             </View>
-            
-            <Image 
-                style={styles.image} 
-                source={require('../assets/original.png')} // dla lokalnych obrazkow 
-                // source={{ uri: 'https://www.yourdictionary.com/images/definitions/lg/12337.summit.jpg' }} // dla obrazkow z sieci (zawsze trzeba im podac "width" i "height")
-                resizeMode="cover"
-                fadeDuration={1000}
-            />
-            <MyButton style={styles.newGameButton} primary={false} onPress={props.handleNewGame}>NEW GAME</MyButton>
-        </View>
+        </ScrollView>
     );
 }
 

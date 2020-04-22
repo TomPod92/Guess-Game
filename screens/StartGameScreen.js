@@ -1,6 +1,6 @@
 // @refresh reset
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TouchableWithoutFeedback, Keyboard, Alert } from 'react-native';
+import { StyleSheet, Text, View, TouchableWithoutFeedback, Keyboard, Alert, Dimensions, ScrollView, KeyboardAvoidingView } from 'react-native';
 
 import colors from '../constants/colors.js';
 import Card from '../components/Card.js';
@@ -52,6 +52,8 @@ const StartGameScreen = (props) => {
     }
 
     return (
+        <ScrollView>
+        <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={30}>
         <TouchableWithoutFeedback onPress={() => {Keyboard.dismiss()}}>
         <View style={styles.screen}>
             <Text style={styles.title}>Select a number</Text>
@@ -75,6 +77,8 @@ const StartGameScreen = (props) => {
             {confirmedOutput}
         </View>
         </TouchableWithoutFeedback>
+        </KeyboardAvoidingView>
+        </ScrollView>
     );
 };
 
@@ -101,12 +105,16 @@ const styles = StyleSheet.create({
     },
     buttonContainer: {
         width: '100%',
-        flexDirection: 'row',
+        flexDirection: Dimensions.get('window').width > 410 ? 'row' : 'column',
+        // flexDirection: 'row',
         justifyContent: 'center',
+        alignItems: 'center'
     },
     button: {
-        marginRight: 10,
-        width: 100,
+        marginRight:  Dimensions.get('window').width > 410 ? 10 : 0,
+        // marginRight:  10,
+        marginBottom:  Dimensions.get('window').width > 410 ? 0 : 10,
+        width: 120,
         alignItems: 'center'
     },
     summaryContainer: {
